@@ -2,3 +2,5 @@ httplib2==0.22.0
 aiogram==2.25.1
 asyncpg==0.29.0
 python-dotenv==1.0.1
+replicate~=0.26.0
+googletrans~=3.0.0
