@@ -1,27 +1,25 @@
 import os
 import replicate
-
 from utils.functions import text_formating
-from utils.translator import translator
+from utils.translator import deep_translator
 
-os.environ["REPLICATE_API_TOKEN"] = "r8_46epRPIxt52foXXpAnwWwiZ81gkkmiT223AIP"
+os.environ["REPLICATE_API_TOKEN"] = "r8_EzQZBybms6Ym79NlaXVaTD5ZrG4e05900iRqi"
 
 
 def mistralai(prompt):
     output = replicate.run(
             "mistralai/mistral-7b-instruct-v0.2",
             input={
-                "top_k": 500,
+                "top_k": 300,
                 "top_p": 0.9,
                 "prompt": prompt,
                 "temperature": 1,
-                "max_new_tokens": 200,
-                "prompt_template": "",
+                "max_new_tokens": 300,
+                "prompt_template": "###Instructions: ",
                 "presence_penalty": 0,
-                "frequency_penalty": 0.8
+                "frequency_penalty": 1
             }
         )
-    print(text_formating(''.join(output), '###Response:'))
-    return translator(text_formating(''.join(output), '###Response:'), "ru")
+    return deep_translator(text_formating(''.join(output), '###Response:'), 'en', "ru")
 
 

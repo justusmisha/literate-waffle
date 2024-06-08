@@ -3,7 +3,7 @@ import replicate
 from utils.functions import text_formating
 from utils.translator import translator
 
-os.environ["REPLICATE_API_TOKEN"] = "r8_46epRPIxt52foXXpAnwWwiZ81gkkmiT223AIP"
+os.environ["REPLICATE_API_TOKEN"] = "r8_EzQZBybms6Ym79NlaXVaTD5ZrG4e05900iRqi"
 
 
 def hermes(prompt):
