@@ -4,7 +4,7 @@ import replicate
 
 from utils.translator import translator, deep_translator
 
-os.environ["REPLICATE_API_TOKEN"] = "r8_46epRPIxt52foXXpAnwWwiZ81gkkmiT223AIP"
+os.environ["REPLICATE_API_TOKEN"] = "r8_EzQZBybms6Ym79NlaXVaTD5ZrG4e05900iRqi"
 
 
 def meta_ai(prompt):
@@ -18,7 +18,6 @@ def meta_ai(prompt):
             "meta/meta-llama-3-8b",
             input=input):
         outputs.append(str(event))
-        print(''.join(outputs))
     return deep_translator(''.join(outputs), 'en', 'ru')
 
 
