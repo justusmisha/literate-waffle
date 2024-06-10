@@ -1,5 +1,4 @@
 from data.config import *
-from utils.translator import translator
 
 
 def prompt_maker(prompt, category, key_words):

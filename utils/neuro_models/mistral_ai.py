@@ -15,11 +15,11 @@ def mistralai(prompt):
                 "prompt": prompt,
                 "temperature": 1,
                 "max_new_tokens": 300,
-                "prompt_template": "###Instructions: ",
+                "prompt_template": "###Instructions: {prompt} ###Response:",
                 "presence_penalty": 0,
                 "frequency_penalty": 1
             }
         )
-    return deep_translator(text_formating(''.join(output), '###Response:'), 'en', "ru")
+    return deep_translator(text_formating(''.join(output), '**'), 'en', "ru")
 
 

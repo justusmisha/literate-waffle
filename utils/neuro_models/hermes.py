@@ -1,7 +1,7 @@
 import os
 import replicate
 from utils.functions import text_formating
-from utils.translator import translator
+from utils.translator import deep_translator
 
 os.environ["REPLICATE_API_TOKEN"] = "r8_EzQZBybms6Ym79NlaXVaTD5ZrG4e05900iRqi"
 
@@ -20,4 +20,4 @@ def hermes(prompt):
     )
 
     keyword = ['Response:', '###Response:', 'Response', '###Response']
-    return translator(text_formating(''.join(output), keyword), "ru")
+    return deep_translator(text_formating(''.join(output), keyword), "ru")
