@@ -2,23 +2,24 @@ import os
 
 import replicate
 
-from utils.translator import translator, deep_translator
+from utils.functions import text_formating
+from utils.translator import deep_translator
 
-os.environ["REPLICATE_API_TOKEN"] = "r8_EzQZBybms6Ym79NlaXVaTD5ZrG4e05900iRqi"
+os.environ["REPLICATE_API_TOKEN"] = "r8_5Bbm0UJC7hhMBsCwroy0GIAICO0xs3Z1uJKh6"
 
 
 def meta_ai(prompt):
-    outputs = []
     input = {
-        "prompt": prompt
+        "prompt": prompt,
+        'max_new_tokens': 265,
+        'length_penalty': 0.5
 
     }
 
-    for event in replicate.stream(
+    output = replicate.run(
             "meta/meta-llama-3-8b",
-            input=input):
-        outputs.append(str(event))
-    return deep_translator(''.join(outputs), 'en', 'ru')
+            input=input)
+    return deep_translator(text_formating(''.join(output), '**'), 'en', 'ru')
 
 
 

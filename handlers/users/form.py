@@ -3,7 +3,7 @@ import asyncio
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
-from loader import dp, form_db
+from loader import dp
 from states.user_state import Form
 from utils.validation import validate_name_surname, validate_phone, validate_instagram
 
