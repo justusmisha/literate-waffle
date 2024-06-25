@@ -19,7 +19,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.10' # Specify the Python version you are using
+        python-version: '3.10'
 
     - name: Install dependencies
       run: |
@@ -38,7 +38,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.10' # Specify the Python version you are using
+        python-version: '3.10'
 
     - name: Install dependencies
       run: |
@@ -51,7 +51,7 @@ jobs:
         SERVER_USER: ${{ secrets.SERVER_USER }}
         SERVER_PASS: ${{ secrets.SERVER_PASS }}
       run: |
-        sshpass -p "$SERVER_PASS" scp -o StrictHostKeyChecking=no -r $(git ls-files --exclude-standard -co) $SERVER_USER@$SERVER_HOST:literate-waffle/
+        sshpass -p "$SERVER_PASS" scp -o StrictHostKeyChecking=no -r $(git pull) $SERVER_USER@$SERVER_HOST:literate-waffle/
         sshpass -p "$SERVER_PASS" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST 'bash literate-waffle/deploy/deploy.sh'
 
    
