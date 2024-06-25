@@ -50,7 +50,7 @@ jobs:
         SERVER_HOST: ${{ secrets.SERVER_HOST }}
         SERVER_USER: ${{ secrets.SERVER_USER }}
         SERVER_PASS: ${{ secrets.SERVER_PASS }}
-      run: |
+      run: 
 #        sshpass -p "$SERVER_PASS" scp -o StrictHostKeyChecking=no -r $(git pull) $SERVER_USER@$SERVER_HOST:literate-waffle/
         sshpass -p "$SERVER_PASS" ssh -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_HOST 'bash literate-waffle/deploy/deploy.sh'
 
