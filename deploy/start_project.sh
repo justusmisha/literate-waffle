@@ -1,8 +1,5 @@
 #!/bin/bash
 
-tmux
-tmux pkill -f tmux
-tmux
+tmux kill-session -t literate-waffle
 
-cd literate-waffle
-python3 main.py
+tmux new-session -d -s literate-waffle 'cd literate-waffle && python3 main.py'
