@@ -1,7 +1,8 @@
 #!/bin/bash
 
 tmux
-tmux kill-session -t 0
+tmux pkill -f tmux
+tmux
 # shellcheck disable=SC2164
 cd literate-waffle
 python3 main.py
