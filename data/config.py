@@ -2,8 +2,10 @@ import os
 
 BOT_TOKEN = "6595975751:AAF2bkyuFbPhdu8243DtsGpkFkkk2JyvS80"
 
-categories = ["Личные вещи", "Транспорт", "Недвижимость", "Работа", "Услуги", "Для дома и дачи", "Бытовая электроника",
-              "Хобби и отдых", "Животные", "Для бизнеса"]
+# categories = ["Личные вещи", "Транспорт", "Недвижимость", "Работа", "Услуги", "Для дома и дачи", "Бытовая электроника",
+#               "Хобби и отдых", "Животные", "Для бизнеса"]
+
+categories = ["Личные вещи", "Услуги", "Для дома и дачи", "Бытовая электроника"]
 
 
 prompt_common_en_1 = "###Instructions:\nYou are a copywriter and write selling ads for avito about "
@@ -16,4 +18,6 @@ prompt_common_en_4 = (". Then make call to  write to avito or make phone call, t
                       "with a "
                       "request to save the ad to favorites. Use emojis to increase the readability of "
                       "the text. Don't use such symbols as * and \". Be sure that all your suggestions and thoughts "
-                      "come to a logical end. **")
+                      "come to a logical end.\n")
+
+spreadsheet_id = '1mlNDWs__ncSwFBGl6xQkwKUQj9RWSQfsvIvxh_CCh5g'

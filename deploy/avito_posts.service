@@ -1,0 +1,11 @@
+[Unit]
+Description=AvitoPostsBot
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/
+ExecStart=/usr/bin/python3 /literate-waffle/main.py
+
+[Install]
+WantedBy=multi-user.target
