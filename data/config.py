@@ -1,6 +1,6 @@
 import os
 
-BOT_TOKEN = "6595975751:AAF2bkyuFbPhdu8243DtsGpkFkkk2JyvS80"
+BOT_TOKEN = "7065723843:AAH9CauM5dJopiEKN5U8ELnYHQ7sm9fgyKQ"
 
 # categories = ["Личные вещи", "Транспорт", "Недвижимость", "Работа", "Услуги", "Для дома и дачи", "Бытовая электроника",
 #               "Хобби и отдых", "Животные", "Для бизнеса"]

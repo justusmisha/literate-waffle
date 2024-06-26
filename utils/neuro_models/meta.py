@@ -11,7 +11,7 @@ os.environ["REPLICATE_API_TOKEN"] = "r8_JSzuYNYvHQNHrD1Mtxt0Bso2Yc545Zr1dxXis"
 def meta_ai(prompt):
     input = {
         "prompt": prompt,
-        'max_new_tokens': 260,
+        'max_new_tokens': 255,
         'length_penalty': 1.0
 
     }
