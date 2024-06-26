@@ -19,7 +19,7 @@ def meta_ai(prompt):
     output = replicate.run(
             "meta/meta-llama-3-8b",
             input=input)
-    return deep_translator(text_formating(''.join(output), '**'), 'en', 'ru')
+    return deep_translator(''.join(output), 'en', 'ru')
 
 
 

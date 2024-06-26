@@ -47,7 +47,7 @@ async def fifth_cat(message: types.Message, state: FSMContext):
     phrase_to_replace = "<ключевые слова от пользователя>"
 
     updated_prompt = google_prompts("Услуги").replace(phrase_to_replace, message.text)
-    prompt_pattern = deep_translator(google_prompts("Услуги"), "ru", "en") + deep_translator(updated_prompt, 'ru', 'en')
+    prompt_pattern = deep_translator(updated_prompt, 'ru', 'en')
     await bot.send_message(chat_id=message.chat.id,
                            text=meta_ai(prompt_pattern))
     await state.finish()
