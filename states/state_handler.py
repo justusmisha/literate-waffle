@@ -4,6 +4,7 @@ from loader import dp, bot
 from states.user_state import Form
 from utils.functions import prompt_maker_en, google_prompts
 from utils.neuro_models.meta import meta_ai
+from utils.neuro_models.yandexGPT import yandexGPT
 from utils.translator import deep_translator
 from utils.validation import validator_for_text
 
@@ -47,9 +48,10 @@ async def fifth_cat(message: types.Message, state: FSMContext):
     phrase_to_replace = "<ключевые слова от пользователя>"
 
     updated_prompt = google_prompts("Услуги").replace(phrase_to_replace, message.text)
-    prompt_pattern = deep_translator(updated_prompt, 'ru', 'en')
+    # prompt_pattern = deep_translator(updated_prompt, 'ru', 'en')
+    text = await yandexGPT("Напиши минимум 250 слов." + updated_prompt)
     await bot.send_message(chat_id=message.chat.id,
-                           text=meta_ai(prompt_pattern))
+                           text=text)
     await state.finish()
 
 
