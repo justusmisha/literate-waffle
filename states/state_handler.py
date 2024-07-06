@@ -11,11 +11,12 @@ from utils.validation import validator_for_text
 
 @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.personal_items)
 async def first_cat(message: types.Message, state: FSMContext):
-    # text = prompt_maker_en(deep_translator(message.text.split()[0], 'ru', 'en'),
-    #                        deep_translator("Личные вещи", 'ru', 'en'), deep_translator(message.text, 'ru', 'en'))
-    prompt_pattern = deep_translator(google_prompts("Личные вещи"), "ru", "en") + 'on the topic ' + deep_translator(message.text, 'ru', 'en')
+    phrase_to_replace = "<ключевые слова от пользователя>"
+
+    updated_prompt = google_prompts("Личные вещи").replace(phrase_to_replace, message.text)
+    text = await yandexGPT("Напиши минимум 250 слов." + updated_prompt)
     await bot.send_message(chat_id=message.chat.id,
-                           text=meta_ai(prompt_pattern))
+                           text=text)
     await state.finish()
 
 
@@ -57,26 +58,23 @@ async def fifth_cat(message: types.Message, state: FSMContext):
 
 @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.for_home_and_garden)
 async def sixth_cat(message: types.Message, state: FSMContext):
-    text = prompt_maker_en(deep_translator(message.text.split()[0], 'ru', 'en'),
-                           deep_translator("Для дома и дачи", 'ru', 'en'), deep_translator(message.text, 'ru', 'en'))
-    prompt_pattern = text + "Also mention these instructions " + deep_translator(google_prompts("Для дома и дачи"),
-                                                                                 'ru',
-                                                                                 'en')
+    phrase_to_replace = "<ключевые слова от пользователя>"
+
+    updated_prompt = google_prompts("Для дома и дачи").replace(phrase_to_replace, message.text)
+    text = await yandexGPT("Напиши минимум 250 слов." + updated_prompt)
     await bot.send_message(chat_id=message.chat.id,
-                           text=meta_ai(prompt_pattern))
+                           text=text)
     await state.finish()
 
 
 @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.consumer_electronics)
 async def seventh_cat(message: types.Message, state: FSMContext):
-    text = prompt_maker_en(deep_translator(message.text.split()[0], 'ru', 'en'),
-                           deep_translator("Бытовая электроника", 'ru', 'en'),
-                           deep_translator(message.text, 'ru', 'en'))
-    prompt_pattern = text + "Also mention these instructions " + deep_translator(google_prompts("Бытовая электроника"),
-                                                                                 'ru',
-                                                                                 'en')
+    phrase_to_replace = "<ключевые слова от пользователя>"
+
+    updated_prompt = google_prompts("Бытовая электроника").replace(phrase_to_replace, message.text)
+    text = await yandexGPT("Напиши минимум 250 слов." + updated_prompt)
     await bot.send_message(chat_id=message.chat.id,
-                           text=meta_ai(prompt_pattern))
+                           text=text)
     await state.finish()
 
 # @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.hobbies)
