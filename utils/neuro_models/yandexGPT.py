@@ -1,14 +1,17 @@
+import uuid
+
 import requests
 import json
 
 
 async def yandexGPT(prompt):
+    session_id = str(uuid.uuid4())
     prompt = {
         "modelUri": "gpt://b1gckhase84lsj8tnur5/yandexgpt-lite",
         "completionOptions": {
             "stream": False,
             "temperature": 0.6,
-            "maxTokens": "2000",
+            "maxTokens": "700",
             'minTokens': '500'
         },
         "messages": [
@@ -17,7 +20,8 @@ async def yandexGPT(prompt):
                 "text": prompt
             },
 
-        ]
+        ],
+        "sessionId": session_id
     }
 
 

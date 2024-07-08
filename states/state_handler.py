@@ -53,11 +53,10 @@ async def first_cat(message: types.Message, state: FSMContext):
 async def fifth_cat(message: types.Message, state: FSMContext):
     updated_prompt = google_prompts("Услуги").replace(keywords, message.text)
     updated_prompt = text_checker(updated_prompt)
-    print(updated_prompt)
     text = await yandexGPT("Напиши хороший текст следуя структуре и инструкциям. Он должен быть полноценным и не "
                            "нуждаться в редакции. Исключи слова 'Заголовок', 'Начало текста', 'Призыв к действию' и "
                            "подобные технические фразы. Выдели каждый призыв к действию пробелами"
-                           + updated_prompt + "Напиши минимум 250 слов.")
+                           + updated_prompt)
     await bot.send_message(chat_id=message.chat.id,
                            text=text_formating(text))
     await state.finish()
