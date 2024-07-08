@@ -20,16 +20,10 @@ def prompt_maker_en(title_form_user, base_category, key_words):
             key_words + prompt_common_en_4)
 
 
-def text_formating(text, keyword):
-    text_spit = text.split(' ')
-    for word in text_spit:
-        if word in keyword:
-            keyword = word
-    index = text.find(keyword)
-
-    if index != -1:
-        result = text[index:]
-        return result
+def text_formating(text):
+    text = text.replace('**', '')
+    text = text.replace('*', '')
+    return text
 
 
 def google_prompts(category):
