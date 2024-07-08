@@ -21,3 +21,6 @@ prompt_common_en_4 = (". Then make call to  write to avito or make phone call, t
                       "come to a logical end.\n")
 
 spreadsheet_id = '1mlNDWs__ncSwFBGl6xQkwKUQj9RWSQfsvIvxh_CCh5g'
+call_to_action_middle = '<Призыв к действию 1>'
+call_to_action_end = '<Призыв к действию 2>'
+keywords = "<ключевые слова от пользователя>"

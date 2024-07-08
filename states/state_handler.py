@@ -1,8 +1,10 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+
+from data.config import keywords, call_to_action_middle, call_to_action_end
 from loader import dp, bot
 from states.user_state import Form
-from utils.functions import prompt_maker_en, google_prompts, text_formating
+from utils.functions import google_prompts, text_formating, get_call_to_action, text_checker
 from utils.neuro_models.meta import meta_ai
 from utils.neuro_models.yandexGPT import yandexGPT
 from utils.translator import deep_translator
@@ -20,6 +22,7 @@ async def first_cat(message: types.Message, state: FSMContext):
                            + updated_prompt + "Напиши минимум 250 слов.")
     await bot.send_message(chat_id=message.chat.id,
                            text=text_formating(text))
+    await state.finish()
 
 
 # @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.transport)
@@ -48,14 +51,13 @@ async def first_cat(message: types.Message, state: FSMContext):
 
 @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.services)
 async def fifth_cat(message: types.Message, state: FSMContext):
-    phrase_to_replace = "<ключевые слова от пользователя>"
-
-    updated_prompt = google_prompts("Услуги").replace(phrase_to_replace, message.text)
-    # prompt_pattern = deep_translator(updated_prompt, 'ru', 'en')
+    updated_prompt = google_prompts("Услуги").replace(keywords, message.text)
+    updated_prompt = text_checker(updated_prompt)
+    print(updated_prompt)
     text = await yandexGPT("Напиши хороший текст следуя структуре и инструкциям. Он должен быть полноценным и не "
                            "нуждаться в редакции. Исключи слова 'Заголовок', 'Начало текста', 'Призыв к действию' и "
                            "подобные технические фразы. Выдели каждый призыв к действию пробелами"
-                           + updated_prompt + "Напиши минимум 200 слов и используй эмодзи.")
+                           + updated_prompt + "Напиши минимум 250 слов.")
     await bot.send_message(chat_id=message.chat.id,
                            text=text_formating(text))
     await state.finish()
@@ -72,6 +74,7 @@ async def sixth_cat(message: types.Message, state: FSMContext):
                            + updated_prompt + "Напиши минимум 250 слов.")
     await bot.send_message(chat_id=message.chat.id,
                            text=text_formating(text))
+    await state.finish()
 
 
 @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.consumer_electronics)
@@ -85,6 +88,7 @@ async def seventh_cat(message: types.Message, state: FSMContext):
                            + updated_prompt + "Напиши минимум 250 слов.")
     await bot.send_message(chat_id=message.chat.id,
                            text=text_formating(text))
+    await state.finish()
 
 # @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.hobbies)
 # async def eighth_cat(message: types.Message, state: FSMContext):
