@@ -12,3 +12,4 @@ class Form(StatesGroup):
     hobbies = State()
     animals = State()
     business = State()
+    key_words = State()

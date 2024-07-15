@@ -2,6 +2,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 
 from data.config import keywords, call_to_action_middle, call_to_action_end
+from keyboards.users.inline.form_keyboards import back_kb
 from loader import dp, bot
 from states.user_state import Form
 from utils.functions import google_prompts, text_formating, get_call_to_action, text_checker
@@ -21,7 +22,8 @@ async def first_cat(message: types.Message, state: FSMContext):
                            "подобные технические фразы."
                            + updated_prompt + "Напиши минимум 250 слов.")
     await bot.send_message(chat_id=message.chat.id,
-                           text=text_formating(text))
+                           text=text_formating(text),
+                           reply_markup=back_kb)
     await state.finish()
 
 
@@ -58,7 +60,8 @@ async def fifth_cat(message: types.Message, state: FSMContext):
                            "подобные технические фразы. Выдели каждый призыв к действию пробелами"
                            + updated_prompt)
     await bot.send_message(chat_id=message.chat.id,
-                           text=text_formating(text))
+                           text=text_formating(text),
+                           reply_markup=back_kb)
     await state.finish()
 
 
@@ -72,7 +75,8 @@ async def sixth_cat(message: types.Message, state: FSMContext):
                            "подобные технические фразы."
                            + updated_prompt + "Напиши минимум 250 слов.")
     await bot.send_message(chat_id=message.chat.id,
-                           text=text_formating(text))
+                           text=text_formating(text),
+                           reply_markup=back_kb)
     await state.finish()
 
 
@@ -86,7 +90,23 @@ async def seventh_cat(message: types.Message, state: FSMContext):
                            "подобные технические фразы."
                            + updated_prompt + "Напиши минимум 250 слов.")
     await bot.send_message(chat_id=message.chat.id,
-                           text=text_formating(text))
+                           text=text_formating(text),
+                           reply_markup=back_kb)
+    await state.finish()
+
+
+@dp.message_handler(lambda message: validator_for_text(message.text), state=Form.key_words)
+async def key_words_cat(message: types.Message, state: FSMContext):
+
+    phrase_to_replace = "<ключевые слова от пользователя>"
+    prompt = """Ты специалист по СЕО и собираешь ключевые запросы для сайта объявлений Авито.
+     Я предлагаю тебе название товара или услуги, а ты выдаешь ключевые продающие фразы списком из 10 штук.
+      Постарайся подобрать фразы разного формата чтоб избежать повторов. <ключевые слова от пользователя>"""
+    updated_prompt = prompt.replace(phrase_to_replace, message.text)
+    text = await yandexGPT(updated_prompt)
+    await bot.send_message(chat_id=message.chat.id,
+                           text=text_formating(text),
+                           reply_markup=back_kb)
     await state.finish()
 
 # @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.hobbies)
