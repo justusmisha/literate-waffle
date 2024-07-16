@@ -80,3 +80,5 @@ def text_checker(text):
     except Exception as e:
         print(e)
         return text
+
+google_prompts('Услуги')
