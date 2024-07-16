@@ -1,7 +1,8 @@
 import random
-from data.config import *
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
+
+from data.config import call_to_action_middle, call_to_action_end
 
 
 def text_formating(text):
@@ -81,4 +82,3 @@ def text_checker(text):
         print(e)
         return text
 
-google_prompts('Услуги')
