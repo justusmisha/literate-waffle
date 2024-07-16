@@ -20,7 +20,7 @@ def google_prompts(category):
     )
 
     service = build('sheets', 'v4', credentials=creds)
-
+    print(service.spreadsheets().values().get(spreadsheetId=spreadsheet_id,))
     sheet = service.spreadsheets()
     print(sheet)
     result = sheet.values().get(spreadsheetId=spreadsheet_id, range=range_name).execute()
