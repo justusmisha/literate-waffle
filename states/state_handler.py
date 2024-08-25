@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 
 from data.config import keywords
-from keyboards.users.inline.form_keyboards import back_kb, first_kb
+from keyboards.users.inline.form_keyboards import back_kb, categories_kb, start_kb
 from loader import dp, bot
 from states.user_state import Form
 from utils.functions import google_prompts, text_formating, text_checker
@@ -24,8 +24,7 @@ async def first_cat(message: types.Message, state: FSMContext):
                                reply_markup=back_kb)
         await state.finish()
     else:
-        await message.answer(f"Выберите категорию", reply_markup=first_kb)
-
+        await message.answer(f"Добро пожаловать", reply_markup=start_kb)
 
 # @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.transport)
 # async def sec_cat(message: types.Message, state: FSMContext):
@@ -65,7 +64,7 @@ async def fifth_cat(message: types.Message, state: FSMContext):
                                reply_markup=back_kb)
         await state.finish()
     else:
-        await message.answer(f"Выберите категорию", reply_markup=first_kb)
+        await message.answer(f"Добро пожаловать", reply_markup=start_kb)
 
 
 @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.for_home_and_garden)
@@ -82,7 +81,7 @@ async def sixth_cat(message: types.Message, state: FSMContext):
                                reply_markup=back_kb)
         await state.finish()
     else:
-        await message.answer(f"Выберите категорию", reply_markup=first_kb)
+        await message.answer(f"Добро пожаловать", reply_markup=start_kb)
 
 
 @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.consumer_electronics)
@@ -98,7 +97,7 @@ async def seventh_cat(message: types.Message, state: FSMContext):
                                reply_markup=back_kb)
         await state.finish()
     else:
-        await message.answer(f"Выберите категорию", reply_markup=first_kb)
+        await message.answer(f"Добро пожаловать", reply_markup=start_kb)
 
 
 @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.key_words)
@@ -114,8 +113,8 @@ async def key_words_cat(message: types.Message, state: FSMContext):
                                reply_markup=back_kb)
         await state.finish()
     else:
-        await message.answer(f"Выберите категорию", reply_markup=first_kb)
-# @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.hobbies)
+        await message.answer(f"Добро пожаловать", reply_markup=start_kb)
+        # @dp.message_handler(lambda message: validator_for_text(message.text), state=Form.hobbies)
 # async def eighth_cat(message: types.Message, state: FSMContext):
 #     text = prompt_maker_en(deep_translator(message.text.split()[0], 'ru', 'en'), deep_translator("Хобби и отдых", 'ru','en'), deep_translator(message.text,'ru', 'en'))
 #     await bot.send_message(chat_id=message.chat.id,

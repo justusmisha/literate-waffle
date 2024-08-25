@@ -1,3 +1,5 @@
+from html.parser import HTMLParser
+
 from aiogram.dispatcher.filters.state import StatesGroup, State
 
 
@@ -13,3 +15,22 @@ class Form(StatesGroup):
     animals = State()
     business = State()
     key_words = State()
+
+
+class LinkParser(StatesGroup):
+    url = State()
+
+
+class QueryParser(StatesGroup):
+    add_query = State()
+    add_pages = State()
+    add_city = State()
+
+
+class GoogleStates(StatesGroup):
+    sheet_name = State()
+
+
+class SellerStates(StatesGroup):
+    seller_url = State()
+    page_numbers = State()
