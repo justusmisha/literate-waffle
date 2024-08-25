@@ -89,7 +89,7 @@ async def link_menu_google(message: Message, state: FSMContext):
             await message.answer('URL добавлен, теперь выберете Google Sheet в который будет спаршена ссылка', reply_markup=kb)
     else:
         await message.answer(f"Добро пожаловать", reply_markup=start_kb)
-    await state.finish()
+        await state.finish()
 
 
 @dp.callback_query_handler(lambda c: c.data.startswith('exact_sheet_'), state='*')
@@ -97,16 +97,18 @@ async def link_menu_google(call: CallbackQuery, state: FSMContext):
     google_sheet_name = str(call.data.split('exact_sheet_')[-1])
     await state.update_data(google_sheet_name=google_sheet_name)
     data = await state.get_data()
+    waiting_message = await call.message.answer(config.PARSING_MESSAGE)
     sheet = await api_client.post(UserEndpoints.google_sheet_by_name, json={'sheet_name': google_sheet_name})
     if sheet:
-        sheet = sheet['sheets']
-        kb = await after_parser_kb(sheet['sheet_id'])
+        kb = await after_parser_kb(sheet['sheets']['sheet_id'])
     result = await api_client.post(UserEndpoints.parse_one_link, json=data)
     await state.finish()
 
     if result:
+        await waiting_message.delete()
         await call.message.edit_text(text=f'✅ Запрос закончен заняв {result["time"]} секунд.', reply_markup=kb)
     else:
+        await waiting_message.delete()
         await call.message.answer(text='❌ Возникла ошибка при парсинге одной ссылки')
 
 
