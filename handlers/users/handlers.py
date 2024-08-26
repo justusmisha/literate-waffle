@@ -285,9 +285,10 @@ async def seller_add_handler(message: Message, state: FSMContext):
         await waiting_message.delete()
 
 
-@dp.callback_query_handler(lambda c: c.data == 'seller_execute')
+@dp.callback_query_handler(lambda c: c.data == 'seller_execute', state='*')
 async def seller_execute_menu(call: CallbackQuery, state: FSMContext):
-    kb = await sellers_kb()
+    await state.finish()
+    kb = await sellers_kb('execute')
     await call.message.edit_text(text='Выберите продавца', reply_markup=kb)
 
 

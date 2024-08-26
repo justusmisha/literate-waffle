@@ -113,7 +113,7 @@ async def sellers_kb(*args) -> InlineKeyboardMarkup:
         if args and args[0] == 'delete':
             kb.add(InlineKeyboardButton(text=seller['seller_name'],
                                         callback_data=f'delete_seller_{seller["seller_name"]}'))
-        else:
+        elif args and args[0] == 'execute':
             kb.add(InlineKeyboardButton(text=seller['seller_name'], callback_data=f'execute_seller_{seller["seller_name"]}'))
-    kb.add(InlineKeyboardButton(text='Назад', callback_data='seller_execute'))
+    kb.add(InlineKeyboardButton(text='Назад', callback_data='seller_menu'))
     return kb
