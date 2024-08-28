@@ -38,6 +38,17 @@ async def query_kb() -> InlineKeyboardMarkup:
     return kb
 
 
+async def pages_kb() -> InlineKeyboardMarkup:
+    kb = InlineKeyboardMarkup(row_width=2)
+    p1 = InlineKeyboardButton(text='1', callback_data='page_1')
+    p2 = InlineKeyboardButton(text='2', callback_data='page_2')
+    p3 = InlineKeyboardButton(text='3', callback_data='page_3')
+    p4 = InlineKeyboardButton(text='4', callback_data='page_4')
+    p5 = InlineKeyboardButton(text='5', callback_data='page_5')
+    kb.add(p1, p2, p3, p4, p5)
+    return kb
+
+
 async def google_sheets_kb(*args) -> InlineKeyboardMarkup or str:
     kb = InlineKeyboardMarkup(row_width=1)
     response = await api_client.get(UserEndpoints.all_google_sheets)

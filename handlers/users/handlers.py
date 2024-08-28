@@ -6,7 +6,7 @@ from aiogram.types import CallbackQuery, InlineKeyboardMarkup, InlineKeyboardBut
 from api.endpooints import UserEndpoints
 from data import config
 from keyboards.users.inline.form_keyboards import market_analyze_kb, categories_kb, google_sheets_kb, after_parser_kb, \
-    query_kb, query_execute_kb, start_kb, google_sheet_menu_kb, all_google_sheets_kb, seller_kb, sellers_kb
+    query_kb, query_execute_kb, start_kb, google_sheet_menu_kb, all_google_sheets_kb, seller_kb, sellers_kb, pages_kb
 from loader import dp, bot, api_client
 from states.user_state import Form, LinkParser, QueryParser, GoogleStates, SellerStates
 
@@ -126,26 +126,18 @@ async def query_add_menu(call: CallbackQuery, state: FSMContext):
 
 @dp.message_handler(state=QueryParser.add_query)
 async def query_add_handler(message: Message, state: FSMContext):
-    if message.text != '/start':
-        query = str(message.text)
-        await state.update_data(query=query)
-        await message.answer(text='Введите количество страниц для парсинга')
-        await QueryParser.add_pages.set()
-    else:
-        await message.answer(f"Добро пожаловать", reply_markup=start_kb)
-        await state.finish()
+    query = str(message.text)
+    await state.update_data(query=query)
+    await message.answer(text='Выберите количество страниц для парсинга', reply_markup=await pages_kb())
+    await QueryParser.add_pages.set()
 
 
-@dp.message_handler(state=QueryParser.add_pages)
-async def query_add_handler(message: Message, state: FSMContext):
-    if message.text != '/start':
-        page_numbers = str(message.text)
-        await state.update_data(page_numbers=page_numbers)
-        await message.answer(text='Введите город')
-        await QueryParser.add_city.set()
-    else:
-        await message.answer(f"Добро пожаловать", reply_markup=start_kb)
-        await state.finish()
+@dp.callback_query_handler(lambda c: c.data.startswith('page_'), state='*')
+async def query_add_handler(call: CallbackQuery, state: FSMContext):
+    page_numbers = str(call.data.split('page_')[-1])
+    await state.update_data(page_numbers=page_numbers)
+    await call.message.answer(text='Введите город')
+    await QueryParser.add_city.set()
 
 
 @dp.message_handler(state=QueryParser.add_city)
