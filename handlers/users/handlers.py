@@ -134,7 +134,7 @@ async def query_add_handler(message: Message, state: FSMContext):
 
 @dp.callback_query_handler(lambda c: c.data.startswith('page_'), state='*')
 async def query_add_handler(call: CallbackQuery, state: FSMContext):
-    page_numbers = str(call.data.split('page_')[-1])
+    page_numbers = int(call.data.split('page_')[-1])
     await state.update_data(page_numbers=page_numbers)
     await call.message.answer(text='Введите город')
     await QueryParser.add_city.set()
@@ -301,20 +301,20 @@ async def seller_doc_handler(call: CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(lambda c: c.data.startswith('seller_page_') ,state='*')
-async def seller_ages_handler(message: Message, state: FSMContext):
-    page_numbers = int(message.text)
+async def seller_ages_handler(call: CallbackQuery, state: FSMContext):
+    page_numbers = int(call.data.split('seller_page_')[-1])
     await state.update_data(page_numbers=page_numbers)
     data = await state.get_data()
     await state.finish()
-    waiting_message = await message.answer(config.PARSING_MESSAGE)
+    waiting_message = await call.message.answer(config.PARSING_MESSAGE)
     result = await api_client.post(UserEndpoints.parse_seller, json=data)
 
     if not result:
-        await message.answer(text='❌ Произошла ошибка при парсинге продавца', reply_markup=InlineKeyboardMarkup().add(
+        await call.message.answer(text='❌ Произошла ошибка при парсинге продавца', reply_markup=InlineKeyboardMarkup().add(
             InlineKeyboardButton(text='◀️ Назад', callback_data='seller_menu')))
         await waiting_message.delete()
     else:
-        await message.answer(text='✅ Продавец спаршен успешно', reply_markup=InlineKeyboardMarkup().add(
+        await call.message.answer(text='✅ Продавец спаршен успешно', reply_markup=InlineKeyboardMarkup().add(
                     InlineKeyboardButton(text='◀️ Назад', callback_data='seller_menu')))
         await waiting_message.delete()
 
