@@ -296,11 +296,11 @@ async def seller_exec_habdlers(call: CallbackQuery, state: FSMContext):
 async def seller_doc_handler(call: CallbackQuery, state: FSMContext):
     google_sheet = str(call.data.split('seller_exact_sheet_')[-1])
     await state.update_data(google_sheet=google_sheet)
-    await call.message.edit_text(text='Введите количество страниц для парсинга', reply_markup=InlineKeyboardMarkup().add(InlineKeyboardButton(text='◀️ Назад', callback_data='seller_menu')))
-    await SellerStates.page_numbers.set()
+    kb = await pages_kb('seller')
+    await call.message.edit_text(text='Введите количество страниц для парсинга', reply_markup=kb.add(InlineKeyboardButton(text='◀️ Назад', callback_data='seller_menu')))
 
 
-@dp.message_handler(state=SellerStates.page_numbers)
+@dp.callback_query_handler(lambda c: c.data.startswith('seller_page_') ,state='*')
 async def seller_ages_handler(message: Message, state: FSMContext):
     page_numbers = int(message.text)
     await state.update_data(page_numbers=page_numbers)

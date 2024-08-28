@@ -38,14 +38,17 @@ async def query_kb() -> InlineKeyboardMarkup:
     return kb
 
 
-async def pages_kb() -> InlineKeyboardMarkup:
+async def pages_kb(*args) -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(row_width=2)
-    p1 = InlineKeyboardButton(text='1', callback_data='page_1')
-    p2 = InlineKeyboardButton(text='2', callback_data='page_2')
-    p3 = InlineKeyboardButton(text='3', callback_data='page_3')
-    p4 = InlineKeyboardButton(text='4', callback_data='page_4')
-    p5 = InlineKeyboardButton(text='5', callback_data='page_5')
-    kb.add(p1, p2, p3, p4, p5)
+
+    base_callback = 'seller_page_' if args and args[0] == 'seller' else 'page_'
+
+    buttons = [
+        InlineKeyboardButton(text=str(i), callback_data=f'{base_callback}{i}')
+        for i in range(1, 6)
+    ]
+
+    kb.add(*buttons)
     return kb
 
 
