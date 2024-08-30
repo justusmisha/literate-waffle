@@ -47,7 +47,8 @@ async def pages_kb(*args) -> InlineKeyboardMarkup:
         InlineKeyboardButton(text=str(i), callback_data=f'{base_callback}{i}')
         for i in range(1, 6)
     ]
-
+    if args and args[0] == 'seller':
+        buttons.append(InlineKeyboardButton(text="Все товары", callback_data=f'seller_page_all'))
     kb.add(*buttons)
     return kb
 

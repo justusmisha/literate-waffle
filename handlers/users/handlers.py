@@ -302,7 +302,7 @@ async def seller_doc_handler(call: CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(lambda c: c.data.startswith('seller_page_') ,state='*')
 async def seller_ages_handler(call: CallbackQuery, state: FSMContext):
-    page_numbers = int(call.data.split('seller_page_')[-1])
+    page_numbers = call.data.split('seller_page_')[-1]
     await state.update_data(page_numbers=page_numbers)
     data = await state.get_data()
     await state.finish()
@@ -333,3 +333,4 @@ async def seller_exec_habdlers(call: CallbackQuery, state: FSMContext):
         await call.message.edit_text(text='✅ Продавец удален', reply_markup=InlineKeyboardMarkup().add(InlineKeyboardButton(text='◀️ Назад', callback_data='seller_menu')))
     else:
         await call.message.answer(text='❌ Возникла ошибка с удалением продавца', reply_markup=InlineKeyboardMarkup().add(InlineKeyboardButton(text='◀️ Назад', callback_data='seller_menu')))
+

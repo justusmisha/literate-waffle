@@ -15,7 +15,7 @@ def google_prompts(category):
     spreadsheet_id = '1mlNDWs__ncSwFBGl6xQkwKUQj9RWSQfsvIvxh_CCh5g'
     range_name = f'Промпты!A1:B4'
     creds = Credentials.from_authorized_user_file(
-        'token.json',
+        './data/token.json',
         scopes=['https://www.googleapis.com/auth/spreadsheets']
     )
 
