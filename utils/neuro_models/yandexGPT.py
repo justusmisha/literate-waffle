@@ -28,7 +28,7 @@ async def yandexGPT(prompt):
     url = "https://llm.api.cloud.yandex.net/foundationModels/v1/completion"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Api-Key AQVN2AUOMm-n8cPEqq9HiTlf_Jy-lU-xXdqLUpTS",
+        "Authorization": "Api-Key AQVNyKYsHMO6ch_OEwMldgVfoh-_-v7nbITBsA_B",
         "x-folder-id": "b1gi45iplkdieuk7imj9"
     }
 
