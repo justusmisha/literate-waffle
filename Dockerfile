@@ -1,15 +1,17 @@
+# Use the official Python image
 FROM python:3.10-slim
 
-# Устанавливаем рабочую директорию
+# Set the working directory in the container
 WORKDIR /app
 
-# Копируем необходимые файлы
-COPY requirements.txt /app/requirements.txt
+# Copy only the requirements file first to leverage Docker's caching mechanism
+COPY requirements.txt /app/
 
-# Устанавливаем необходимые пакеты
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copy the rest of the application files
+COPY . /app/
 
-# Запускаем сервер FastAPI с помощью uvicorn
+# Set the default command to run your bot
 CMD ["python3", "main.py"]
