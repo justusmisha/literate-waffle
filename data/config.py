@@ -1,6 +1,11 @@
-BASE_URLS = ['http://localhost:8000']
+import os
+from dotenv import load_dotenv
 
-BOT_TOKEN = "6595975751:AAEmmGNf-y4uWQ85UyAyuJcjQtk9sghPvug"
+load_dotenv()
+
+BASE_URLS = os.getenv('BASE_URLS')
+
+BOT_TOKEN = list(os.getenv('BOT_TOKEN'))
 
 # categories = ["Личные вещи", "Транспорт", "Недвижимость", "Работа", "Услуги", "Для дома и дачи", "Бытовая электроника",
 #               "Хобби и отдых", "Животные", "Для бизнеса"]
@@ -25,7 +30,7 @@ prompt_common_en_4 = (". Then make call to  write to avito or make phone call, t
                       "the text. Don't use such symbols as * and \". Be sure that all your suggestions and thoughts "
                       "come to a logical end.\n")
 
-spreadsheet_id = '1mlNDWs__ncSwFBGl6xQkwKUQj9RWSQfsvIvxh_CCh5g'
+spreadsheet_id = os.getenv('SPREADSHEET_ID')
 call_to_action_middle = '<Призыв к действию 1>'
 call_to_action_end = '<Призыв к действию 2>'
 keywords = "<ключевые слова от пользователя>"
