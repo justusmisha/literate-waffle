@@ -3,9 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_URLS = os.getenv('BASE_URLS')
+BASE_URLS = [os.getenv('BASE_URLS')]
 
-BOT_TOKEN = list(os.getenv('BOT_TOKEN'))
+BOT_TOKEN = str(os.getenv('BOT_TOKEN'))
 
 # categories = ["Личные вещи", "Транспорт", "Недвижимость", "Работа", "Услуги", "Для дома и дачи", "Бытовая электроника",
 #               "Хобби и отдых", "Животные", "Для бизнеса"]
