@@ -187,9 +187,10 @@ async def query_execute_handler(call: CallbackQuery, state: FSMContext):
 async def qery_execute_google(call: CallbackQuery, state: FSMContext):
     google_sheet = str(call.data.split('exec_exact_sheet_')[-1])
     data = await state.get_data()
+    print(data)
     waiting_message = await call.message.answer(config.PARSING_MESSAGE)
     json = {'google_sheet_name': google_sheet,
-            'query': data['query']}
+            'query_id': int(data['query'])}
     result = await api_client.post(UserEndpoints.link_executor, json=json)
     sheet = await api_client.post(UserEndpoints.google_sheet_by_name, json={'sheet_name': google_sheet})
     if result:

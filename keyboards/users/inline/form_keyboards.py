@@ -86,10 +86,11 @@ async def after_parser_kb(sheet_id) -> InlineKeyboardMarkup:
 async def query_execute_kb(queries, *args) -> InlineKeyboardMarkup:
     kb = InlineKeyboardMarkup(row_width=1)
     for query in queries:
+        query_id = str(query["id"])
         if args and args[0] == 'delete':
-            kb.add(InlineKeyboardButton(text=query['query'], callback_data=f'delete_query_{query["query"]}'))
+            kb.add(InlineKeyboardButton(text=query['query'], callback_data=f'delete_query_{query_id}'))
         else:
-            kb.add(InlineKeyboardButton(text=query['query'], callback_data=f'query_execute_{query["query"]}'))
+            kb.add(InlineKeyboardButton(text=query['query'], callback_data=f'query_execute_{query_id}'))
     kb.add(InlineKeyboardButton(text='◀️ Назад', callback_data='query_menu'))
     return kb
 
